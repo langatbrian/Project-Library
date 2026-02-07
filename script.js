@@ -68,3 +68,27 @@ libraryDiv.addEventListener("click", (e) => {
   }
 });
 
+
+const dialog = document.getElementById("bookDialog");
+const newBookBtn = document.getElementById("newBookBtn");
+const closeDialog = document.getElementById("closeDialog");
+
+newBookBtn.addEventListener("click", () => dialog.showModal());
+closeDialog.addEventListener("click", () => dialog.close());
+
+const bookForm = document.getElementById("bookForm");
+
+bookForm.addEventListener("submit", (e) => {
+  e.preventDefault(); // 🚨 important
+
+  const title = document.getElementById("title").value;
+  const author = document.getElementById("author").value;
+  const pages = document.getElementById("pages").value;
+  const read = document.getElementById("read").checked;
+
+  addBookToLibrary(title, author, pages, read);
+  displayBooks();
+
+  bookForm.reset();
+  dialog.close();
+});
