@@ -44,3 +44,27 @@ function displayBooks() {
 }
 
 displayBooks();
+
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
+};
+
+libraryDiv.addEventListener("click", (e) => {
+  const card = e.target.closest(".book-card");
+  if (!card) return;
+
+  const bookId = card.dataset.id;
+  const book = myLibrary.find(b => b.id === bookId);
+
+  if (e.target.classList.contains("remove-book")) {
+    const index = myLibrary.findIndex(b => b.id === bookId);
+    myLibrary.splice(index, 1);
+    displayBooks();
+  }
+
+  if (e.target.classList.contains("toggle-read")) {
+    book.toggleRead();
+    displayBooks();
+  }
+});
+
